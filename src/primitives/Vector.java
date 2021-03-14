@@ -24,7 +24,7 @@ public class Vector {
     //endregion
     // region Methods
     public double lengthSquared() {
-        return head.x.coord*head.x.coord + head.y.coord*head.y.coord + head.z.coord*head.z.coord;
+        return head.distanceSquared(Point3D.ZERO);
     }
 
     public double length() {
