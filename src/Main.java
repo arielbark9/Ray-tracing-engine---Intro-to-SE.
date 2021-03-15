@@ -1,3 +1,9 @@
+/**
+ * @author Ariel Bar Kalifa 214181604
+ * @author Matanya Friedheim
+ */
+
+
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
