@@ -2,9 +2,25 @@ package geometries;
 
 import primitives.*;
 
+/**
+ * Plane class represents two-dimensional plane in 3D Cartesian coordinate
+ * system
+ * Implements Geometry interface.
+ *
+ * @author ariel and mf.
+ */
 public class Plane implements Geometry {
-    Vector normal; // (A,B,C) -> Ax + By + Cz + d = 0
-    Point3D q0; // the point that the normal vector gets out.
+
+    /**
+     * The perpendicular vector to the plane a.k.a. the normal.
+     * (A,B,C) -> Ax + By + Cz + d = 0
+     */
+    private Vector normal;
+    /**
+     * The point on the plane that is at the tail of the normal.
+     * (instead of (0,0,0)).
+     */
+    private Point3D q0;
 
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
         try

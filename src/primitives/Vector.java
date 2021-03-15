@@ -1,12 +1,21 @@
 package primitives;
 
+/**
+ * Class Vector is the basic class representing a 0-based vector of Euclidean geometry in Cartesian
+ * 3-Dimensional coordinate system.
+ *
+ * @author Ariel
+ */
 public class Vector {
+    /**
+     * Point representing the head of the vector.
+     */
     private Point3D head;
 
     //region ctors
     public Vector(Coordinate x, Coordinate y, Coordinate z) {
         var p = new Point3D(x,y,z);
-        if(p.equals(Point3D.ZERO))
+        if(p.equals(Point3D.ZERO)) // no vector 0.
             throw new IllegalArgumentException("Error! Vector 0 is not allowed!");
         else
             head = p;
@@ -19,23 +28,41 @@ public class Vector {
             head = p;
     }
     public Vector(Point3D p) {
-        head = p;
+        if(p.equals(Point3D.ZERO))
+            throw new IllegalArgumentException("Error! Vector 0 is not allowed!");
+        else
+            head = p;
     }
     //endregion
+
     // region Methods
+    /**
+     * @return Squared length of vector.
+     */
     public double lengthSquared() {
         return head.distanceSquared(Point3D.ZERO);
     }
 
+    /**
+     * @return length of vector.
+     */
     public double length() {
         double lenSq = this.lengthSquared();
         return Math.sqrt(lenSq);
     }
 
+    /**
+     * @param that 2nd vector
+     * @return a new vector = this . that
+     */
     public double dotProduct(Vector that) {
         return this.head.x.coord * that.head.x.coord + this.head.y.coord * that.head.y.coord + this.head.z.coord * that.head.z.coord;
     }
 
+    /**
+     * @param that 2nd vector
+     * @return a new vector = this x that
+     */
     public Vector crossProduct(Vector that) {
         var x = this.head.y.coord * that.head.z.coord - this.head.z.coord * that.head.y.coord;
         var y = this.head.z.coord * that.head.x.coord - this.head.x.coord * that.head.z.coord;
@@ -43,19 +70,26 @@ public class Vector {
         return new Vector(x,y,z);
     }
 
-    public Point3D getHead() {
-        return head;
-    }
-
+    /**
+     * normalize this vector
+     * @return normalized vector.
+     */
     public Vector normalize() {
         var normalized = this.normalized();
         this.head = normalized.head;
         return this;
     }
 
+    /**
+     * @return a new normalized vector
+     */
     public Vector normalized() {
         var len = this.length();
         return new Vector(this.head.x.coord / len, this.head.y.coord / len, this.head.z.coord / len);
+    }
+
+    public Point3D getHead() {
+        return head;
     }
     // endregion
     // region Overrides

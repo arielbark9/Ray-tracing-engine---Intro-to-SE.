@@ -1,16 +1,21 @@
 package primitives;
 
-import primitives.Vector;
-
 /**
  * Class Point3D is the basic class representing a point of Euclidean geometry in Cartesian
  * 3-Dimensional coordinate system.
  * @author Ariel
  */
 public class Point3D {
-    Coordinate x;
-    Coordinate y;
-    Coordinate z;
+
+    /**
+     * (x,y,z) point.
+     */
+    Coordinate x,y,z;
+
+    /**
+     * Static constant zero value of point.
+     */
+    public static final Point3D ZERO = new Point3D(0,0,0);
 
     public Point3D(Coordinate x, Coordinate y, Coordinate z) {
         this.x = x;
@@ -23,12 +28,20 @@ public class Point3D {
         this.z = new Coordinate(z);
     }
 
-    public static final Point3D ZERO = new Point3D(0,0,0);
-
+    /**
+     * add vector to point.
+     * @param v vector to add to point.
+     * @return point this + v.
+     */
     public Point3D add(Vector v) {
         return new Point3D(x.coord + v.getHead().x.coord,y.coord + v.getHead().y.coord,z.coord + v.getHead().z.coord);
     }
 
+    /**
+     * get vector from this to p1
+     * @param p1 head of vector point
+     * @return 0-based vector this->p1.
+     */
     public Vector subtract(Point3D p1) {
         try {
             return new Vector(this.x.coord-p1.x.coord,this.y.coord-p1.y.coord,this.z.coord-p1.z.coord);
@@ -37,6 +50,10 @@ public class Point3D {
         }
     }
 
+    /**
+     * @param p1 point to calc distance squared to
+     * @return squared distance between this and p1
+     */
     public double distanceSquared(Point3D p1) {
         var xDif = (this.x.coord - p1.x.coord);
         var yDif = (this.y.coord - p1.y.coord);
@@ -45,6 +62,10 @@ public class Point3D {
         return  xDif*xDif + yDif*yDif + zDif*zDif;
     }
 
+    /**
+     * @param p1 point to calc distance to
+     * @return distance between this and p1
+     */
     public double distance(Point3D p1) {
         return Math.sqrt(distanceSquared(p1));
     }

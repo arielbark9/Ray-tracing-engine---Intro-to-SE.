@@ -1,6 +1,13 @@
 package geometries;
-
 import primitives.*;
+
+/**
+ * Triangle class represents two-dimensional triangle in 3D Cartesian coordinate
+ * system
+ * Inherits Polygon class since it is a polygon with 3 vertices.
+ *
+ * @author ariel and mf.
+ */
 
 public class Triangle extends Polygon{
     public Triangle(Point3D po1 ,Point3D po2 ,Point3D po3)
