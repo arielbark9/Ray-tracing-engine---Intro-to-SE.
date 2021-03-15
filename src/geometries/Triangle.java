@@ -8,7 +8,31 @@ public class Triangle extends Polygon{
         super(po1,po2,po3);
     }
 
-    boolean CheckPointInTriangle(Point3D P)//function that checks if point is in the triangle
+    @Override
+    public Vector getNormal(Point3D p1) { return null; }
+
+    @Override
+    public String toString() {
+        return "Triangle: " +
+                vertices.get(0).toString() + ',' +
+                vertices.get(1).toString() + ',' +
+                vertices.get(2).toString();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*boolean CheckPointInTriangle(Point3D P)//function that checks if point is in the triangle
     {
 
         Vector v0 = vertices.get(2).subtract(vertices.get(0));
@@ -27,12 +51,4 @@ public class Triangle extends Polygon{
 
         return (u >= 0) && (v >= 0) && (u + v < 1);
     }
-
-    @Override
-    public Vector getNormal(Point3D p1) {
-        if(CheckPointInTriangle(p1)) {
-            return plane.getNormal(p1);
-        }
-        else throw new IllegalArgumentException("point is not in the triangle");
-    }
-}
+*/

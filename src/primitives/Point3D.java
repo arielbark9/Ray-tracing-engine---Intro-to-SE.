@@ -31,7 +31,7 @@ public class Point3D {
 
     public Vector subtract(Point3D p1) {
         try {
-            return new Vector(p1.x.coord - this.x.coord, p1.y.coord - this.y.coord, p1.z.coord - this.z.coord);
+            return new Vector(this.x.coord-p1.x.coord,this.y.coord-p1.y.coord,this.z.coord-p1.z.coord);
         } catch (IllegalArgumentException e){
             throw e;
         }
