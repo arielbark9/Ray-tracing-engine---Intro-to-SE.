@@ -52,6 +52,18 @@ public class Vector {
     }
 
     /**
+     * @param num number to scale by (not 0)
+     * @return new vector = this * num
+     */
+    public Vector scale(double num) {
+        try {
+            return new Vector(head.x.coord*num, head.y.coord*num, head.z.coord*num);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+    }
+
+    /**
      * @param that 2nd vector
      * @return a new vector = this . that
      */
@@ -86,6 +98,30 @@ public class Vector {
     public Vector normalized() {
         var len = this.length();
         return new Vector(this.head.x.coord / len, this.head.y.coord / len, this.head.z.coord / len);
+    }
+
+    /**
+     * @param that 2nd vector
+     * @return new Vector = this + that
+     */
+    public Vector add(Vector that){
+        try {
+            return new Vector(this.head.add(that));
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
+    }
+
+    /**
+     * @param that 2nd vector
+     * @return new Vector = this - that
+     */
+    public Vector subtract(Vector that){
+        try {
+            return this.head.subtract(that.head);
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        }
     }
 
     public Point3D getHead() {
