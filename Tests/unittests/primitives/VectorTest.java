@@ -1,4 +1,4 @@
-package unittests;
+package unittests.primitives;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +16,9 @@ import static primitives.Util.isZero;
 
 public class VectorTest {
     /**
-     * Test method for constructors
+     * Test method for {@link Vector#Vector(double, double, double)}
+     * and {@link Vector#Vector(Point3D)}
+     * and {@link Vector#Vector(Coordinate, Coordinate, Coordinate)}
      */
     @Test
     public void testConstructor() {
