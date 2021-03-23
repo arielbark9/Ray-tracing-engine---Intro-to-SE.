@@ -16,9 +16,6 @@ public class Triangle extends Polygon{
     }
 
     @Override
-    public Vector getNormal(Point3D p1) { return this.plane.getNormal(); }
-
-    @Override
     public String toString() {
         return "Triangle: " +
                 vertices.get(0).toString() + ',' +

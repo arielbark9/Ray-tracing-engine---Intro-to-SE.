@@ -13,7 +13,6 @@ import static primitives.Util.isZero;
  * Unit tests for primitives.Vector class
  * @author Ariel
  */
-
 public class VectorTest {
     /**
      * Test method for {@link Vector#Vector(double, double, double)}

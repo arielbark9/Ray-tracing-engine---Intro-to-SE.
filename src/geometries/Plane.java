@@ -38,7 +38,7 @@ public class Plane implements Geometry {
     }
 
     public Vector getNormal(Point3D p1) {
-        return null;
+        return normal;
     }
 
     public Vector getNormal()
