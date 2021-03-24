@@ -21,7 +21,7 @@ public class TubeTest {
         Tube tube = new Tube(new Ray(new Point3D(0,0,0),new Vector(0,0,1)),1d);
         // ============ Equivalence Partitions Tests ==============
         // TC01: Test normal to Tube (also tests that normal length is 1)
-        var normal = tube.getNormal(new Point3D(-1,0,1));
+        var normal = tube.getNormal(new Point3D(-1,0,-1));
         assertEquals("Error: getNormal() doesn't work correctly.", //
                 new Vector(-1,0,0), normal);
         // =============== Boundary Values Tests ==================
