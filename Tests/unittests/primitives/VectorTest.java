@@ -89,7 +89,7 @@ public class VectorTest {
         assertTrue("crossProduct() result is not orthogonal to 2nd operand", isZero(vr.dotProduct(v2)));
 
         // =============== Boundary Values Tests ==================
-        // TC11: test zero vector from cross-productof co-lined vectors
+        // TC11: test zero vector from cross-product of co-lined vectors
         Vector v3 = new Vector(-2, -4, -6);
         try {
             v1.crossProduct(v3);
