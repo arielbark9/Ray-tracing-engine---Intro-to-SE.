@@ -8,7 +8,7 @@ import primitives.Vector;
  *
  * @author ariel and mf.
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
     /**
      * calculates normal vector to a shape -
      * at the point provided if shape is 3D,
