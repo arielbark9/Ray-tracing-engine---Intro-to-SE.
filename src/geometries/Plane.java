@@ -61,7 +61,7 @@ public class Plane implements Geometry {
         double t = alignZero(numerator/denominator);
         if(t > 0) {
             LinkedList<Point3D> res = new LinkedList<>();
-            res.add(ray.getP0().add(ray.getDir().scale(t)));
+            res.add(ray.getPoint(t));
             return res;
         }
         return null;

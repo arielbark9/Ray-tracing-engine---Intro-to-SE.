@@ -28,9 +28,10 @@ public class Triangle extends Polygon{
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> points = plane.findIntersections(ray);
+        List<Point3D> p = plane.findIntersections(ray);
+        if (p == null) return null;
 
-        Point3D p0 = points.get(0);
+        Point3D p0 = p.get(0);
 
         Vector v1,v2,v3;
         try {
@@ -56,7 +57,7 @@ public class Triangle extends Polygon{
 
         if (isZero(vn1) || isZero(vn2) || isZero(vn3)) return null;
         if ((vn1 > 0 && vn2 > 0 && vn3 > 0) || (vn1 < 0 && vn2 < 0 && vn3 < 0)) {
-            return points;
+            return p;
         }
         return null;
     }

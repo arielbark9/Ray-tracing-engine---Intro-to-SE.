@@ -32,7 +32,7 @@ public class Cylinder extends Tube{
         // we assume point is on cylinder so we check if it is on top
         // bottom or side.
         Point3D centerBottom = axisRay.getP0();
-        Point3D centerTop = axisRay.getP0().add(axisRay.getDir().scale(height));
+        Point3D centerTop = axisRay.getPoint(height);
         if(p1.equals(centerTop) || isZero(p1.subtract(centerTop).dotProduct(axisRay.getDir()))) { // top
             return axisRay.getDir();
         } else if (p1.equals(centerBottom) || isZero(p1.subtract(centerBottom).dotProduct(axisRay.getDir()))) { // bottom

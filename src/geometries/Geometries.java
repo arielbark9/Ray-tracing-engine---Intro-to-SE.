@@ -14,24 +14,20 @@ public class Geometries implements Intersectable {
     private List<Intersectable> list;
 
     public Geometries(){
-        list = new ArrayList<Intersectable>();
+        list = new LinkedList<Intersectable>();
     }
 
+//    public Geometries(Intersectable... geometries){
+//        list = Arrays.asList(geometries.clone());
+//    }
     public Geometries(Intersectable... geometries){
-        list = Arrays.asList(geometries.clone());
+        list = new LinkedList<Intersectable>();
+        list.addAll(Arrays.asList(geometries.clone()));
     }
 
     public void add(Intersectable... geometries){
-        int i = geometries.length - 1;
-        while(i + 1 != 0)
-        {
-            list.add(geometries[i]);
-            i--;
-        }
+        list.addAll(Arrays.asList(geometries.clone()));
     }
-
-
-
 
     /**
      * finds all intersections between a shape and a ray.
@@ -44,20 +40,14 @@ public class Geometries implements Intersectable {
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        ArrayList<Point3D> mergedList = new ArrayList<>();
-        int length = list.size();
-        try {
-            while (length != 0) {
-                List<Point3D> TempList = list.get(length - 1).findIntersections(ray);
-                if (TempList != null )
-                    mergedList.addAll(TempList);
-                length--;
-            }
-        } catch (IllegalArgumentException ex) {
-            return null;
+        LinkedList<Point3D> intersections = new LinkedList<>();
+        for (Intersectable g: list) {
+            List<Point3D> temp = g.findIntersections(ray);
+            if(temp!=null)
+                intersections.addAll(temp);
         }
-        if(mergedList.size() == 0)
+        if(intersections.size() == 0)
             return null;
-        return mergedList;
+        return intersections;
     }
 }

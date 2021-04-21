@@ -56,7 +56,7 @@ public class Sphere implements Geometry {
             u = center.subtract(ray.getP0());
         } catch (IllegalArgumentException ex) { // ray starts at center
             LinkedList<Point3D> res = new LinkedList<>();
-            res.add(ray.getP0().add(ray.getDir().scale(radius)));
+            res.add(ray.getPoint(radius));
             return res;
         }
         double tM = u.dotProduct(ray.getDir()); // projection of u on v.
@@ -72,11 +72,11 @@ public class Sphere implements Geometry {
         if(t1 > 0 || t2 > 0) { // this is done to not initialize for no reason.
             res = new LinkedList<>();
             if (t1 > 0) {
-                Point3D p1 = ray.getP0().add(ray.getDir().scale(t1));
+                Point3D p1 = ray.getPoint(t1);
                 res.add(p1);
             }
             if (t2 > 0) {
-                Point3D p2 = ray.getP0().add(ray.getDir().scale(t2));
+                Point3D p2 = ray.getPoint(t2);
                 res.add(p2);
             }
         } else return null;
