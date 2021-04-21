@@ -29,6 +29,7 @@ public class Triangle extends Polygon{
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> points = plane.findIntersections(ray);
+
         Point3D p0 = points.get(0);
 
         Vector v1,v2,v3;
