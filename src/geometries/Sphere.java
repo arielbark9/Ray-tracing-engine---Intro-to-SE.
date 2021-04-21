@@ -1,7 +1,9 @@
 package geometries;
 import primitives.*;
 
+import java.util.LinkedList;
 import java.util.List;
+import static primitives.Util.*;
 
 /**
  * Sphere class represents three-dimensional sphere in 3D Cartesian coordinate
@@ -47,7 +49,39 @@ public class Sphere implements Geometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        // the mathematical model as shown in recitation 3.
+
+        Vector u;
+        try {
+            u = center.subtract(ray.getP0());
+        } catch (IllegalArgumentException ex) { // ray starts at center
+            LinkedList<Point3D> res = new LinkedList<>();
+            res.add(ray.getP0().add(ray.getDir().scale(radius)));
+            return res;
+        }
+        double tM = u.dotProduct(ray.getDir()); // projection of u on v.
+        double d = Math.sqrt(u.lengthSquared() - (tM*tM));
+
+        if (d-radius >= 0) return null; // ray is outside of sphere
+
+        double tH = Math.sqrt(radius*radius - d*d);
+        double t1 = alignZero(tM + tH);
+        double t2 = alignZero(tM - tH);
+
+        LinkedList<Point3D> res;
+        if(t1 > 0 || t2 > 0) { // this is done to not initialize for no reason.
+            res = new LinkedList<>();
+            if (t1 > 0) {
+                Point3D p1 = ray.getP0().add(ray.getDir().scale(t1));
+                res.add(p1);
+            }
+            if (t2 > 0) {
+                Point3D p2 = ray.getP0().add(ray.getDir().scale(t2));
+                res.add(p2);
+            }
+        } else return null;
+
+        return res;
     }
 }
 

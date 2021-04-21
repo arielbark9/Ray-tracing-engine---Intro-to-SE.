@@ -42,12 +42,8 @@ public class Point3D {
      * @param p1 head of vector point
      * @return 0-based vector this->p1.
      */
-    public Vector subtract(Point3D p1) {
-        try {
-            return new Vector(this.x.coord-p1.x.coord,this.y.coord-p1.y.coord,this.z.coord-p1.z.coord);
-        } catch (IllegalArgumentException e){
-            throw e;
-        }
+    public Vector subtract(Point3D p1) throws IllegalArgumentException {
+        return new Vector(this.x.coord-p1.x.coord,this.y.coord-p1.y.coord,this.z.coord-p1.z.coord);
     }
 
     /**
@@ -85,6 +81,16 @@ public class Point3D {
                 "," + y.toString() +
                 "," + z.toString() +
                 ")";
+    }
+
+    public double getX() {
+        return x.coord;
+    }
+    public double getY() {
+        return y.coord;
+    }
+    public double getZ() {
+        return z.coord;
     }
     // endregion
 }
