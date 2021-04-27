@@ -77,7 +77,7 @@ public class Point3D {
     }
     @Override
     public String toString() {
-        return "(" + x.toString() +
+        return "P(" + x.toString() +
                 "," + y.toString() +
                 "," + z.toString() +
                 ")";
