@@ -5,6 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static primitives.Util.isZero;
+import static primitives.Util.random;
 
 public class Camera {
     /**
@@ -35,7 +36,19 @@ public class Camera {
     }
 
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
-        return null;
+        // pIJ = pCenter
+        Point3D pIJ = pos.add(vTo.scale(distance));
+        // Ratio
+        double rX = width/nX;
+        double rY = height/nY;
+        // Xj, Yi
+        double xJ = (j - (double)(nX-1)/2) * rX;
+        double yI = -(i - (double)(nY-1)/2) * rY;
+        // adding to pCenter
+        if(!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
+        if(!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
+        // p0 = position of camera, dir = pIJ - pos.
+        return new Ray(pos, pIJ.subtract(pos));
     }
 
     // region getters and setters
@@ -47,6 +60,11 @@ public class Camera {
 
     public Camera setDistance(double distance) {
         this.distance = distance;
+        return this;
+    }
+
+    public Camera setPosition(Point3D p0) {
+        pos = p0;
         return this;
     }
 

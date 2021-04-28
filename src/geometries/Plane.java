@@ -34,7 +34,7 @@ public class Plane implements Geometry {
     }
 
     public Plane(Point3D p1 , Vector v1) {
-        normal = v1;
+        normal = v1.normalize();
         q0 = p1;
     }
 
