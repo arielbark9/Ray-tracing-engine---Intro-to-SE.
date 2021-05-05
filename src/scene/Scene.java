@@ -22,12 +22,12 @@ public class Scene {
     /**
      * Scene ambient light
      */
-    public AmbientLight ambientLight = new AmbientLight(Color.BLACK,0);
+    public AmbientLight ambientLight = new AmbientLight(Color.BLACK,1);
 
     /**
      * geometries in scene (composite model)
      */
-    Geometries geometries;
+    public Geometries geometries;
 
     /**
      * constructor initiates geometries model.
@@ -38,13 +38,23 @@ public class Scene {
         geometries = new Geometries();
     }
 
+    /**
+     * builder pattern setter
+     * @param background background color
+     * @return this object
+     */
     public Scene setBackground(Color background) {
         this.background = background;
         return this;
     }
 
-    public Scene setAmbientLight(Color color, double kA) {
-        this.ambientLight = new AmbientLight(color,kA);
+    /**
+     * builder pattern setter
+     * @param ambientLight ambient light
+     * @return this object
+     */
+    public Scene setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
         return this;
     }
 
