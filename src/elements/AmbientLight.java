@@ -15,10 +15,10 @@ public class AmbientLight {
     /**
      * constructor
      * @param color light's color
-     * @param kA reducing factor
+     * @param kA reduction factor
      */
     public AmbientLight(Color color, double kA) {
-        intensity = color.reduce(kA);
+        intensity = color.scale(kA);
     }
 
     /**
