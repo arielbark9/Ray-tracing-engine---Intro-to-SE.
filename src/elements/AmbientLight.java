@@ -12,6 +12,10 @@ public class AmbientLight {
      */
     private Color intensity;
 
+    public AmbientLight() {
+        intensity = Color.BLACK;
+    }
+
     /**
      * constructor
      * @param color light's color

@@ -14,11 +14,6 @@ public class Render {
     private ImageWriter imageWriter;
 
     /**
-     * Scene of image
-     */
-    private Scene scene;
-
-    /**
      * Camera taking the picture
      */
     private Camera camera;
@@ -35,16 +30,6 @@ public class Render {
      */
     public Render setImageWriter(ImageWriter imageWriter) {
         this.imageWriter = imageWriter;
-        return this;
-    }
-
-    /**
-     * builder pattern setter
-     * @param scene scene
-     * @return this object
-     */
-    public Render setScene(Scene scene) {
-        this.scene = scene;
         return this;
     }
 
@@ -72,7 +57,7 @@ public class Render {
      * render the image pixel by pixel
      */
     public void renderImage(){
-        if(imageWriter == null || scene == null || camera == null || rayTracer == null){
+        if(imageWriter == null || camera == null || rayTracer == null){
             throw new MissingResourceException("Error! cannot render image, a resource is missing",null,null);
         }
 

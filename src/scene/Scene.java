@@ -22,7 +22,7 @@ public class Scene {
     /**
      * Scene ambient light
      */
-    public AmbientLight ambientLight = new AmbientLight(Color.BLACK,0);
+    public AmbientLight ambientLight = new AmbientLight();
 
     /**
      * geometries in scene (composite model)
