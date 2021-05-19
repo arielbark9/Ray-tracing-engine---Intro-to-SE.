@@ -12,7 +12,7 @@ import static primitives.Util.*;
  *
  * @author ariel and mf.
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 
     /**
      * Point3D that represents center of sphere
@@ -48,15 +48,15 @@ public class Sphere implements Geometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         // the mathematical model as shown in recitation 3.
 
         Vector u;
         try {
             u = center.subtract(ray.getP0());
         } catch (IllegalArgumentException ex) { // ray starts at center
-            LinkedList<Point3D> res = new LinkedList<>();
-            res.add(ray.getPoint(radius));
+            LinkedList<GeoPoint> res = new LinkedList<>();
+            res.add(new GeoPoint(this,ray.getPoint(radius)));
             return res;
         }
         double tM = u.dotProduct(ray.getDir()); // projection of u on v.
@@ -68,16 +68,16 @@ public class Sphere implements Geometry {
         double t1 = alignZero(tM + tH);
         double t2 = alignZero(tM - tH);
 
-        LinkedList<Point3D> res;
+        LinkedList<GeoPoint> res;
         if(t1 > 0 || t2 > 0) { // this is done to not initialize for no reason.
             res = new LinkedList<>();
             if (t1 > 0) {
                 Point3D p1 = ray.getPoint(t1);
-                res.add(p1);
+                res.add(new GeoPoint(this,p1));
             }
             if (t2 > 0) {
                 Point3D p2 = ray.getPoint(t2);
-                res.add(p2);
+                res.add(new GeoPoint(this,p2));
             }
         } else return null;
 

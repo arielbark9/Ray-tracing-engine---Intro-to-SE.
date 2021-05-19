@@ -35,20 +35,11 @@ public class Geometries implements Intersectable {
         this.geometries.addAll(Arrays.asList(geometries.clone()));
     }
 
-    /**
-     * finds all intersections between a shape and a ray.
-     *
-     * we've chosen a linked list implementation because of adding complexity and
-     * lack of need for random access.
-     *
-     * @param ray the ray to intersect with
-     * @return list of intersection points
-     */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        LinkedList<Point3D> intersections = new LinkedList<>();
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        LinkedList<GeoPoint> intersections = new LinkedList<>();
         for (Intersectable g: geometries) {
-            List<Point3D> temp = g.findIntersections(ray);
+            List<GeoPoint> temp = g.findGeoIntersections(ray);
             if(temp!=null)
                 intersections.addAll(temp);
         }

@@ -13,7 +13,7 @@ import static primitives.Util.*;
  *
  * @author ariel and mf.
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
     /**
      * The perpendicular vector to the plane a.k.a. the normal.
@@ -48,7 +48,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         // the mathematical model as shown in recitation 3.
         double numerator;
         try {
@@ -60,8 +60,8 @@ public class Plane implements Geometry {
         if(isZero(numerator) || isZero(denominator)) return null; // orthogonal || parallel
         double t = alignZero(numerator/denominator);
         if(t > 0) {
-            LinkedList<Point3D> res = new LinkedList<>();
-            res.add(ray.getPoint(t));
+            LinkedList<GeoPoint> res = new LinkedList<>();
+            res.add(new GeoPoint(this,ray.getPoint(t)));
             return res;
         }
         return null;
