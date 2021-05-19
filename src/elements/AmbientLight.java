@@ -6,14 +6,10 @@ import primitives.Color;
  * A light element representing ambient light -
  * affects everything equally.
  */
-public class AmbientLight {
-    /**
-     * intensity and color of light
-     */
-    private Color intensity;
+public class AmbientLight extends Light {
 
     public AmbientLight() {
-        intensity = Color.BLACK;
+        super(Color.BLACK);
     }
 
     /**
@@ -22,13 +18,7 @@ public class AmbientLight {
      * @param kA reduction factor
      */
     public AmbientLight(Color color, double kA) {
-        intensity = color.scale(kA);
+        super(color.scale(kA));
     }
 
-    /**
-     * @return intensity of ambient light
-     */
-    public Color getIntensity() {
-        return intensity;
-    }
 }

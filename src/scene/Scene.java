@@ -1,9 +1,13 @@
 package scene;
 
 import elements.AmbientLight;
+import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Passive Data Structure representing a scene of geometries and lights.
@@ -28,6 +32,8 @@ public class Scene {
      * geometries in scene (composite model)
      */
     public Geometries geometries;
+
+    public List<LightSource> lights = new LinkedList<>();
 
     /**
      * constructor initiates geometries model.
@@ -55,6 +61,16 @@ public class Scene {
      */
     public Scene setAmbientLight(AmbientLight ambientLight) {
         this.ambientLight = ambientLight;
+        return this;
+    }
+
+    /**
+     * builder pattern setter
+     * @param lights lights list
+     * @return this object
+     */
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
         return this;
     }
 
