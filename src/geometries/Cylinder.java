@@ -46,9 +46,4 @@ public class Cylinder extends Tube{
     public String toString() {
         return "Cylinder: " + super.toString() + ", Height: " + height;
     }
-
-    @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return null;
-    }
 }

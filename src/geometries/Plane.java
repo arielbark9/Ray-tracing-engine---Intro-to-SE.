@@ -66,4 +66,24 @@ public class Plane extends Geometry {
         }
         return null;
     }
+
+    @Override
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        // the mathematical model as shown in recitation 3.
+        double numerator;
+        try {
+            numerator = normal.dotProduct(q0.subtract(ray.getP0()));
+        } catch (IllegalArgumentException ex) { // q0 == p0
+            return null; // either included or no intersections so 0 points
+        }
+        double denominator = normal.dotProduct(ray.getDir());
+        if(isZero(numerator) || isZero(denominator)) return null; // orthogonal || parallel
+        double t = alignZero(numerator/denominator);
+        if(t > 0 && alignZero(t-maxDistance) <= 0) {
+            LinkedList<GeoPoint> res = new LinkedList<>();
+            res.add(new GeoPoint(this,ray.getPoint(t)));
+            return res;
+        }
+        return null;
+    }
 }

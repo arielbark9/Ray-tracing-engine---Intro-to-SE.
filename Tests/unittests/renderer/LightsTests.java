@@ -181,4 +181,31 @@ public class LightsTests {
 		render.writeToImage();
 	}
 
+	/**
+	 * Produce a picture of a sphere lighted by a many lights
+	 */
+	@Test
+	public void MyPicture() {
+		scene1 = new Scene("Test scene") //
+				.setAmbientLight(new AmbientLight(new Color(java.awt.Color.CYAN), 0.15))
+		.setBackground(new Color(java.awt.Color.gray));
+		camera1 = new Camera(new Point3D(-1000, 0, 0), new Vector(1, 0, 0), new Vector(0, 0, 1)) //
+				.setViewPlaneSize(500, 500) //
+				.setDistance(1000);
+
+
+		scene1.geometries.add(new Sphere(new Point3D(100,0,0), 100).setEmission(new Color(java.awt.Color.BLUE))
+				.setMaterial(new Material().setKd(0.4).setKs(0.4).setShininess(100)));
+		scene1.lights.add(new DirectionalLight(new Color(0, 400, 200), new Vector(1, 0, -1)));
+		scene1.lights.add(new PointLight(new Color(700, 0, 0), new Point3D(-100, 0, -90)));
+
+		ImageWriter imageWriter = new ImageWriter("mine", 1000, 1000);
+		Render render = new Render()//
+				.setImageWriter(imageWriter) //
+				.setCamera(camera1) //
+				.setRayTracer(new RayTracerBasic(scene1));
+		render.renderImage();
+		render.writeToImage();
+	}
+
 }

@@ -41,6 +41,11 @@ public class PointLight extends Light implements LightSource{
         return p.subtract(position).normalize();
     }
 
+    @Override
+    public double getDistance(Point3D point) {
+        return this.position.distance(point);
+    }
+
     /**
      * builder pattern setter
      * @param kC constant attenuation factor

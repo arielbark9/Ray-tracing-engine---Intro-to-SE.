@@ -48,7 +48,7 @@ public class Sphere extends Geometry {
     }
 
     @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         // the mathematical model as shown in recitation 3.
 
         Vector u;
@@ -69,13 +69,14 @@ public class Sphere extends Geometry {
         double t2 = alignZero(tM - tH);
 
         LinkedList<GeoPoint> res;
-        if(t1 > 0 || t2 > 0) { // this is done to not initialize for no reason.
+        if((t1 > 0 && alignZero(t1-maxDistance) <= 0) //
+                || (t2 > 0 && alignZero(t2-maxDistance) <= 0)) { // this is done to not initialize for no reason.
             res = new LinkedList<>();
-            if (t1 > 0) {
+            if (t1 > 0 && alignZero(t1-maxDistance) <= 0) {
                 Point3D p1 = ray.getPoint(t1);
                 res.add(new GeoPoint(this,p1));
             }
-            if (t2 > 0) {
+            if (t2 > 0 && alignZero(t2-maxDistance) <= 0) {
                 Point3D p2 = ray.getPoint(t2);
                 res.add(new GeoPoint(this,p2));
             }
