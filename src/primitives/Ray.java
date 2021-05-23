@@ -5,6 +5,9 @@ import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
 /**
  * Class Ray is the class representing a ray of Euclidean geometry in Cartesian
  * 3-Dimensional coordinate system.
@@ -12,19 +15,42 @@ import java.util.List;
  * @author Ariel
  */
 public class Ray {
+
     /**
      * Point representing the start of the ray.
      */
     private Point3D p0;
+
     /**
      * Vector representing the direction of the ray.
      * dir is a normalized vector
      */
     private Vector dir;
 
+    /**
+     * regular constructor
+     * @param p0 head of ray
+     * @param dir direction of ray
+     */
     public Ray(Point3D p0, Vector dir) {
         this.p0 = p0;
         this.dir = dir.normalize(); // make sure vector is normalized
+    }
+
+    private static final double DELTA = 0.1;
+
+    /**
+     * constructor for construction a ray with moved head in delta direction
+     * @param head initial head of ray
+     * @param direction direction of ray
+     * @param normal normal to geometry
+     */
+    public Ray(Point3D head, Vector direction, Vector normal) {
+        double nd = normal.dotProduct(direction);
+        // nd can't be 0 because of intersections with objects
+        Vector delta = normal.scale(nd > 0 ? DELTA : -DELTA);
+        p0  = head.add(delta);
+        dir = direction.normalize();
     }
 
     @Override
