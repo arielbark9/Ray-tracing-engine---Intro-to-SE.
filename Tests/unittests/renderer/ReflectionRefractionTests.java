@@ -3,6 +3,7 @@
  */
 package unittests.renderer;
 
+import geometries.Plane;
 import org.junit.Test;
 
 import elements.*;
@@ -78,6 +79,46 @@ public class ReflectionRefractionTests {
 				.setKl(0.00001).setKq(0.000005));
 
 		ImageWriter imageWriter = new ImageWriter("reflectionTwoSpheresMirrored", 500, 500);
+		Render render = new Render() //
+				.setImageWriter(imageWriter) //
+				.setCamera(camera) //
+				.setRayTracer(new RayTracerBasic(scene));
+
+		render.renderImage();
+		render.writeToImage();
+	}
+
+	/**
+	 * Produce a picture of a sphere lighted by a spot light
+	 */
+	@Test
+	public void myTest() {
+		Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setViewPlaneSize(1000, 1000).setDistance(900); //
+
+		scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
+
+		scene.geometries.add( //
+				new Triangle(new Point3D(300,-750,-300),new Point3D(700,-220,-300),new Point3D(440,390,-100))
+						.setEmission(new Color(java.awt.Color.black)).setMaterial(new Material().setKd(0.5).setKs(0.25).setKr(1)),
+				new Triangle(new Point3D(300,-750,-300),new Point3D(-220,470,-300),new Point3D(440,390,-300))
+						.setEmission(new Color(java.awt.Color.LIGHT_GRAY)).setMaterial(new Material().setKd(0.5).setKs(0.25).setKt(0.9)),
+				new Triangle(new Point3D(300,-750,-300),new Point3D(-220,470,-300),new Point3D(-620,-60,-300))
+						.setEmission(new Color(java.awt.Color.LIGHT_GRAY)).setMaterial(new Material().setKd(0.5).setKs(0.25).setKt(0.9)),
+				new Triangle(new Point3D(300,-750,-300),new Point3D(-360,-670,-300),new Point3D(-620,-60,-300))
+						.setEmission(new Color(java.awt.Color.LIGHT_GRAY)).setMaterial(new Material().setKd(0.5).setKs(0.25).setKt(0.9)),
+				new Sphere(new Point3D(0.0, 0, -100),200) //
+						.setEmission(new Color(51, 51, 51)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.5)),
+				new Sphere(new Point3D(0, 0, -100),100) //
+						.setEmission(new Color(255, 82, 92)) //
+						.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20))
+		);
+
+		scene.lights.add(new PointLight(new Color(100, 100, 250), new Point3D(0, 20, -10)) //
+				.setKl(0.00001).setKq(0.000005));
+
+		ImageWriter imageWriter = new ImageWriter("myTest", 1000, 1000);
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
