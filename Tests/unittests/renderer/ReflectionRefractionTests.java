@@ -99,65 +99,82 @@ public class ReflectionRefractionTests {
 				.setViewPlaneSize(1000, 1000).setDistance(1000); //
 		scene.setBackground(Color.BLACK);
 		Color tableColor = new Color(240,128,128);
+		Material mirror = new Material().setKd(0.15).setKr(0.75).setKs(0.75).setShininess(2);
+		Material wallMat = new Material().setKd(0.5).setKs(0.7);
+		Material tableTop = new Material().setKd(0.7).setKs(0.15);
+		Material tableLegs = new Material().setKd(0.5).setKs(0.25);
 		scene.geometries.add( //
 				//ABC
 				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,0),new Point3D(-400,400,0))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//ACD
 				new Triangle(new Point3D(400,-400,0),new Point3D(-400,400,0),new Point3D(-400,-400,0))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//OMN
 				new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(400,400,40))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//OMP
 				new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(-400,-400,40))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//ANM
 				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,-400,40))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//ANB
 				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,400,0))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//APM
 				new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(400,-400,40))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//APD
 				new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,-400,0))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//DPO
 				new Triangle(new Point3D(-400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,400,40))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//DOC
 				new Triangle(new Point3D(-400,-400,0),new Point3D(-400,400,40),new Point3D(-400,400,0))
-						.setEmission(tableColor).setMaterial(new Material().setKd(0.5).setKs(0.15).setKt(0.1)),
+						.setEmission(tableColor).setMaterial(tableTop),
 				//K-Cyl
 				new Cylinder(new Ray(new Point3D(-300,-300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(new Material().setKd(0.5).setKs(0.25)),
+						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
 				//E-Cyl
 				new Cylinder(new Ray(new Point3D(300,-300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(new Material().setKd(0.5).setKs(0.25)),
+						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
 				//C-Cyl
 				new Cylinder(new Ray(new Point3D(300,300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(new Material().setKd(0.5).setKs(0.25)),
+						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
 				//L-Cyl
 				new Cylinder(new Ray(new Point3D(-300,300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(new Material().setKd(0.5).setKs(0.25)),
+						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
 				//Floor
 				new Plane(new Point3D(0,0,-300), new Vector(0,0,1))
-						.setEmission(new Color(102, 102, 153)).setMaterial(new Material().setKd(0.5).setKs(0.7)),
+						.setEmission(new Color(102, 102, 153)).setMaterial(wallMat),
 				//Wall 1
 				new Plane(new Point3D(0,1000,0), new Vector(0,-1,0))
-						.setEmission(new Color(Color.BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.7)),
+						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat),
 				//Wall 2
 				new Plane(new Point3D(-1000,0,0), new Vector(1,0,0))
-						.setEmission(new Color(Color.BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.7)),
+						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat),
+				//Mirror 1
+				new Triangle(new Point3D(400,998,0),new Point3D(400,998,600),new Point3D(-400,998,0))
+						.setEmission(Color.BLACK).setMaterial(mirror),
+				//Mirror 2
+				new Triangle(new Point3D(-400,998,600),new Point3D(400,998,600),new Point3D(-400,998,0))
+						.setEmission(Color.BLACK).setMaterial(mirror),
+				//back of Mirror 1
+				new Triangle(new Point3D(410,999,-10),new Point3D(410,999,610),new Point3D(-410,999,-10))
+						.setEmission(new Color(255, 255, 204)).setMaterial(wallMat),
+				//back of Mirror 2
+				new Triangle(new Point3D(-410,999,610),new Point3D(410,999,610),new Point3D(-410,999,-10))
+						.setEmission(new Color(255, 255, 204)).setMaterial(wallMat),
 				// Bulb sphere
 				new Sphere(new Point3D(0,0,700),100).setEmission(new Color(153, 255, 102)).setMaterial(new Material().setKt(0.9))
 		);
 
+
+		Color color;
 		for (int i = -200; i < 200; i+=50) {
 			for (int j = -200; j < 200; j+=50) {
-				Color color;
 				if(((i+200)/50)%2 == 0)
 					color = (((j+200)/50)%2 == 0)? Color.BLACK : new Color(255,255,255);
 				else
@@ -167,25 +184,17 @@ public class ReflectionRefractionTests {
 						.setEmission(color),
 						new Triangle(new Point3D(j+50,i+50,45),new Point3D(j+50,i,45),new Point3D(j,i+50,45))
 								.setEmission(color));
-			}
-		}
 
-		for (int i = -200; i < 200; i+=50) {
-			for (int j = -200; j < 200; j+=50) {
-				Color color;
-				if(((((i+200)/50)%2 == 0 && ((j+200)/50)%2 == 0) ||
-						(((i+200)/50)%2 != 0 && ((j+200)/50)%2 != 0))
-				&& (i<-50 || i>=50))
+				if(color.equals(Color.BLACK) && (i<-50 || i>=50))
 				{
 					if(i<-50)
 						color = new Color(153, 102, 0);
 					else
-						color = new Color(0, 204, 0);
+						color = new Color(123, 104, 255);
 
 					scene.geometries.add(new Cylinder(new Ray(new Point3D(j+25,i+25,45),new Vector(0,0,1)),15,7)
-								.setEmission(color));
+							.setEmission(color));
 				}
-
 			}
 		}
 
