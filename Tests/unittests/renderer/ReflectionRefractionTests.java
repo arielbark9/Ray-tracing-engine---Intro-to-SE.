@@ -1,6 +1,3 @@
-/**
- * 
- */
 package unittests.renderer;
 
 import geometries.Cylinder;
@@ -23,7 +20,7 @@ import scene.Scene;
  */
 public class ReflectionRefractionTests {
 	private Scene scene = new Scene("Test scene");
-
+	private final int rayCount = 64;
 	/**
 	 * Produce a picture of a sphere lighted by a spot light
 	 */
@@ -46,7 +43,10 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("refractionTwoSpheres", 500, 500)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -84,7 +84,10 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 
 		render.renderImage();
 		render.writeToImage();
@@ -206,7 +209,10 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 
 		render.renderImage();
 		render.writeToImage();
@@ -239,7 +245,10 @@ public class ReflectionRefractionTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 
 		render.renderImage();
 		render.writeToImage();

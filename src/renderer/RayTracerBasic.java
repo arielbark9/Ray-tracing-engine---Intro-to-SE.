@@ -33,6 +33,15 @@ public class RayTracerBasic extends RayTracerBase {
         return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
     }
 
+    public Color traceRays(List<Ray> rays) {
+        Color pixelColor = Color.BLACK;
+        for (Ray ray : rays) {
+            pixelColor = pixelColor.add(traceRay(ray));
+        }
+        pixelColor = pixelColor.reduce(rays.size());
+        return pixelColor;
+    }
+
     /**
      * calculate the color of a given point in the scene
      * @param gp point on shape
@@ -50,7 +59,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param ray initial intersecting ray
      * @param level level of recursion
      * @param k attenuation factor
-     * @return
+     * @return color at point
      */
     private Color calcColor(GeoPoint intersection, Ray ray, int level, double k) {
         Color color = intersection.geometry.getEmission();

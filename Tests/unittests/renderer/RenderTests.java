@@ -17,6 +17,7 @@ public class RenderTests {
 	private Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 			.setDistance(100) //
 			.setViewPlaneSize(500, 500);
+	private final int rayCount = 64;
 
 	/**
 	 * Produce a scene with basic 3D model and render it into a png image with a
@@ -42,7 +43,10 @@ public class RenderTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 
 		render.renderImage();
 		render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -73,7 +77,10 @@ public class RenderTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 
 		render.renderImage();
 		render.printGrid(100, new Color(java.awt.Color.WHITE));

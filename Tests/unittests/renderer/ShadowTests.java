@@ -17,6 +17,7 @@ public class ShadowTests {
 	private Scene scene = new Scene("Test scene");
 	private Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 			.setViewPlaneSize(200, 200).setDistance(1000);
+	private final int rayCount = 64;
 
 	/**
 	 * Produce a picture of a sphere and triangle with point light and shade
@@ -38,7 +39,10 @@ public class ShadowTests {
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleInitial", 400, 400)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -62,7 +66,10 @@ public class ShadowTests {
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleMove1", 400, 400)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -86,7 +93,10 @@ public class ShadowTests {
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleMove2", 400, 400)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -110,7 +120,10 @@ public class ShadowTests {
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleLight1", 400, 400)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
@@ -134,17 +147,20 @@ public class ShadowTests {
 		Render render = new Render(). //
 				setImageWriter(new ImageWriter("shadowSphereTriangleLight2", 400, 400)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
 
 	/**
-		 * Produce a picture of a two triangles lighted by a spot light with a Sphere
-		 * producing a shading
-		 */
-		@Test
-		public void trianglesSphere() {
+	 * Produce a picture of a two triangles lighted by a spot light with a Sphere
+	 * producing a shading
+	 */
+	@Test
+	public void trianglesSphere() {
 			scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
 			scene.geometries.add( //
@@ -163,9 +179,11 @@ public class ShadowTests {
 		Render render = new Render() //
 				.setImageWriter(new ImageWriter("shadowTrianglesSphere", 600, 600)) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new RayTracerBasic(scene))
+				.setSSrays(rayCount)
+				.setMultithreading(3)
+				.setDebugPrint();
 		render.renderImage();
 		render.writeToImage();
 	}
-
 }

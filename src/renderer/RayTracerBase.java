@@ -4,6 +4,8 @@ import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
 
+import java.util.List;
+
 /**
  * Ray tracer abstract parent designed to trace rays in scene
  */
@@ -27,4 +29,11 @@ public abstract class RayTracerBase {
      * @return Color of traced point on the ray
      */
     public abstract Color traceRay(Ray ray);
+
+    /**
+     * trace rays in scene
+     * @param rays traced rays
+     * @return average Color of traced point on the ray
+     */
+    public abstract Color traceRays(List<Ray> rays);
 }
