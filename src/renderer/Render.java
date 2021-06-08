@@ -110,6 +110,8 @@ public class Render {
 			++row;
 			if (row < _maxRows) {
 				col = 0;
+				target.row = this.row;
+				target.col = this.col;
 				if (_counter == _nextCounter) {
 					++_percents;
 					_nextCounter = _pixels * (_percents + 1) / 100;

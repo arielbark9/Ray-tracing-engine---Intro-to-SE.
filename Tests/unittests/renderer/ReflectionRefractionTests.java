@@ -205,7 +205,7 @@ public class ReflectionRefractionTests {
 		scene.lights.add(new PointLight(new Color(153, 255, 102),new Point3D(0,0,700))
 				.setKl(0.00001).setKq(0.000001));
 
-		ImageWriter imageWriter = new ImageWriter("myTest", 1000, 1000);
+		ImageWriter imageWriter = new ImageWriter("myTest", 3840, 2160);
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
