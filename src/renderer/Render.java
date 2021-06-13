@@ -155,8 +155,14 @@ public class Render {
 			threads[i] = new Thread(() -> {
 				Pixel pixel = new Pixel();
 				while (thePixel.nextPixel(pixel)) {
-					List<Ray> rays = camera.constructRaysThroughPixel(nX, nY, pixel.col, pixel.row, SSrays);
-					imageWriter.writePixel(pixel.col, pixel.row, rayTracer.traceRays(rays));
+					if(SSrays == 0 || SSrays == 1) {
+						Ray ray = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row);
+						imageWriter.writePixel(pixel.col, pixel.row, rayTracer.traceRay(ray));
+					}
+					else {
+						List<Ray> rays = camera.constructRaysThroughPixel(nX, nY, pixel.col, pixel.row, SSrays);
+						imageWriter.writePixel(pixel.col, pixel.row, rayTracer.traceRays(rays));
+					}
 				}
 			});
 		}
