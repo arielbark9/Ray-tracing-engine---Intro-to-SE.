@@ -33,6 +33,13 @@ public class RayTracerBasic extends RayTracerBase {
         return closestPoint == null ? scene.background : calcColor(closestPoint, ray);
     }
 
+    /**
+     * same idea as trace ray but this function traces a list of rays
+     * and then divides by the amount of rays to get the average color
+     * of the pixel
+     * @param rays rays to be traced
+     * @return average of the trace rays' colors
+     */
     public Color traceRays(List<Ray> rays) {
         Color pixelColor = Color.BLACK;
         for (Ray ray : rays) {

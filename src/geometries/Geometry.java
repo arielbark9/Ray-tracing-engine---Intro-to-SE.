@@ -1,8 +1,5 @@
 package geometries;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point3D;
-import primitives.Vector;
+import primitives.*;
 
 /**
  * Geometry abstract class represents the capabilities of
@@ -16,7 +13,15 @@ public abstract class Geometry implements Intersectable {
      */
     protected Color emission = Color.BLACK;
 
+    /**
+     * material object representing the material of the geometry
+     */
     private Material material = new Material();
+
+    /**
+     * bounding box of geometry
+     */
+    protected BoundingBox boundingBox;
 
     /**
      * calculates normal vector to a shape -

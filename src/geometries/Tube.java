@@ -14,7 +14,7 @@ import static primitives.Util.isZero;
  *
  * @author ariel and mf.
  */
-public class Tube extends Geometry{
+public class Tube extends Geometry {
 
     /**
      * Ray that represents the axis in the center of the tube
@@ -50,6 +50,32 @@ public class Tube extends Geometry{
         }
         // normal is a normalized Op1.
         return p1.subtract(o).normalize();
+    }
+
+    /**
+     * init bounding box for Tube
+     * @param axisRay normal to plane
+     * @param p0 tail of tube axis ray
+     */
+    private void initializeBoundingBox(Ray axisRay, Point3D p0) {
+        double radiusE = radius + 0.0000001d;
+        if(axisRay.getDir().equals(new Vector(1,0,0))) {
+            boundingBox = new BoundingBox(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY,//
+                    p0.getY() - radiusE,p0.getY() + radiusE,//
+                    p0.getZ() - radiusE,p0.getZ() + radiusE);
+        } else if(axisRay.getDir().equals(new Vector(0,1,0))) {
+            boundingBox = new BoundingBox(p0.getX() - radiusE, p0.getX() + radiusE,//
+                    Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    p0.getZ() - radiusE,p0.getZ() + radiusE);
+        } else if(axisRay.getDir().equals(new Vector(0,0,1))) {
+            boundingBox = new BoundingBox(p0.getX() - radiusE, p0.getX() + radiusE,//
+                    p0.getY() - radiusE,p0.getY() + radiusE,//
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        } else {
+            boundingBox = new BoundingBox(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        }
     }
 
     public Ray getAxisRay() {

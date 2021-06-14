@@ -26,6 +26,10 @@ public class Sphere extends Geometry {
     public Sphere(Point3D center, double r) {
         this.center = center;
         this.radius = r;
+        double radiusE = radius + 0.0000001d; // radius plus a small number epsilon
+        boundingBox = new BoundingBox(center.getX()-radiusE, center.getX()+radiusE,//
+                center.getY()-radiusE, center.getY()+radiusE,//
+                center.getZ()-radiusE, center.getZ()+radiusE);
     }
 
     @Override

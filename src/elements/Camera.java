@@ -39,6 +39,14 @@ public class Camera {
         vRight = vTo.crossProduct(vUp);
     }
 
+    /**
+     * construct a ray from the camera to the pixel(i,j) to be traced.
+     * @param nX number of width pixels
+     * @param nY number of height pixels
+     * @param j y coord of pixel to construct ray through
+     * @param i x coord of pixel to construct ray through
+     * @return ray through pixel(i,j).
+     */
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         // pIJ = pCenter
         Point3D pIJ = pos.add(vTo.scale(distance));
@@ -55,6 +63,17 @@ public class Camera {
         return new Ray(pos, pIJ.subtract(pos));
     }
 
+    /**
+     * construct a list of rays from the camera to the pixel(i,j) to be traced.
+     * this algorithm creates a grid within the pixel and randomly places rays inside each square
+     * in the grid.
+     * @param nX number of width pixels
+     * @param nY number of height pixels
+     * @param j y coord of pixel to construct ray through
+     * @param i x coord of pixel to construct ray through
+     * @param SSrays number of super sampling rays (root must be integer)
+     * @return list of rays through pixel(i,j).
+     */
     public List<Ray> constructRaysThroughPixel(int nX, int nY, int j, int i, int SSrays) {
         List<Ray> rays = new LinkedList<>();
 

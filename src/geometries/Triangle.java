@@ -13,9 +13,15 @@ import static primitives.Util.*;
  */
 
 public class Triangle extends Polygon{
-    public Triangle(Point3D po1 ,Point3D po2 ,Point3D po3)
-    {
+    public Triangle(Point3D po1 ,Point3D po2 ,Point3D po3) {
         super(po1,po2,po3);
+        double minX = po1.getX()<po2.getX()?(po3.getX()<po1.getX()?po3.getX():po1.getX()):(po3.getX()<po2.getX()?po3.getX():po2.getX());
+        double minY = po1.getY()<po2.getY()?(po3.getY()<po1.getY()?po3.getY():po1.getY()):(po3.getY()<po2.getY()?po3.getY():po2.getY());
+        double minZ = po1.getZ()<po2.getZ()?(po3.getZ()<po1.getZ()?po3.getZ():po1.getZ()):(po3.getZ()<po2.getZ()?po3.getZ():po2.getZ());
+        double maxX = po1.getX()>po2.getX()?(po3.getX()>po1.getX()?po3.getX():po1.getX()):(po3.getX()>po2.getX()?po3.getX():po2.getX());
+        double maxY = po1.getY()>po2.getY()?(po3.getY()>po1.getY()?po3.getY():po1.getY()):(po3.getY()>po2.getY()?po3.getY():po2.getY());
+        double maxZ = po1.getZ()>po2.getZ()?(po3.getZ()>po1.getZ()?po3.getZ():po1.getZ()):(po3.getZ()>po2.getZ()?po3.getZ():po2.getZ());
+        boundingBox = new BoundingBox(minX,maxX,minY,maxY,minZ,maxZ);
     }
 
     @Override

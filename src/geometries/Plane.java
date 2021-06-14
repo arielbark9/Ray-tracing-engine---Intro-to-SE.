@@ -31,11 +31,38 @@ public class Plane extends Geometry {
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
         normal = v1.crossProduct(v2).normalize();
+        initializeBoundingBox(normal,q0);
     }
 
     public Plane(Point3D p1 , Vector v1) {
         normal = v1.normalize();
         q0 = p1;
+        initializeBoundingBox(normal,q0);
+    }
+
+    /**
+     * init bounding box for plane
+     * @param normal normal to plane
+     * @param q0 tail of plane normal point
+     */
+    private void initializeBoundingBox(Vector normal, Point3D q0) {
+        if(normal.equals(new Vector(1,0,0))) {
+            boundingBox = new BoundingBox(q0.getX()-0.0005d,q0.getX()+0.0005d,//
+                    Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        } else if(normal.equals(new Vector(0,1,0))) {
+            boundingBox = new BoundingBox(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    q0.getY()-0.0005d,q0.getY()+0.0005d,//
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        } else if(normal.equals(new Vector(0,0,1))) {
+            boundingBox = new BoundingBox(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    q0.getZ()-0.0005d, q0.getZ()+0.0005d);
+        } else {
+            boundingBox = new BoundingBox(Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY,//
+                    Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+        }
     }
 
     public Vector getNormal(Point3D p1) {

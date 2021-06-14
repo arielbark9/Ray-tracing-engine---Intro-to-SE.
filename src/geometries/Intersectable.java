@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * a shape that is intesectable by a ray.
  */
 public interface Intersectable {
+
     /**
      * Geometry and Point PDS.
      */

@@ -155,7 +155,7 @@ public class Render {
 			threads[i] = new Thread(() -> {
 				Pixel pixel = new Pixel();
 				while (thePixel.nextPixel(pixel)) {
-					if(SSrays == 0 || SSrays == 1) {
+					if(SSrays == 0 || SSrays == 1) { // no super sampling
 						Ray ray = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row);
 						imageWriter.writePixel(pixel.col, pixel.row, rayTracer.traceRay(ray));
 					}
