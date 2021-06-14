@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.BoundingBox;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -27,6 +28,21 @@ public class Cylinder extends Tube{
     public Cylinder(Ray axisRay, double radius, double height) {
         super(axisRay, radius);
         this.height = height;
+        Point3D up = axisRay.getP0().add(axisRay.getDir().scale(height));
+        Point3D down = axisRay.getP0();
+        boundingBox = new BoundingBox(
+                Math.min(Math.min(up.getX() + radius, up.getX() - radius),
+                        Math.min(down.getX() + radius, down.getX() - radius)),
+                Math.max(Math.max(up.getX() + radius, up.getX() - radius),
+                        Math.max(down.getX() + radius, down.getX() - radius)),
+                Math.min(Math.min(up.getY() + radius, up.getY() - radius),
+                        Math.min(down.getY() + radius, down.getY() - radius)),
+                Math.max(Math.max(up.getY() + radius, up.getY() - radius),
+                        Math.max(down.getY() + radius, down.getY() - radius)),
+                Math.min(Math.min(up.getZ() + radius, up.getZ() - radius),
+                        Math.min(down.getZ() + radius, down.getZ() - radius)),
+                Math.max(Math.max(up.getZ() + radius, up.getZ() - radius),
+                       Math.max(down.getZ() + radius, down.getZ() - radius)));
     }
 
     @Override

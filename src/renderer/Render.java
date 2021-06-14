@@ -77,7 +77,7 @@ public class Render {
 			_maxCols = maxCols;
 			_pixels = (long) maxRows * maxCols;
 			_nextCounter = _pixels / 100;
-			if (Render.this._print) System.out.printf("\r %02d%%", _percents);
+			if (Render.this._print) System.out.println(String.format("\r %02d%%", _percents));
 		}
 
 		/**
@@ -131,10 +131,10 @@ public class Render {
 		public boolean nextPixel(Pixel target) {
 			int percents = nextP(target);
 			if (percents > 0)
-				if (Render.this._print) System.out.printf("\r%02d%%", percents);
+				if (Render.this._print) System.out.println(String.format("\r%02d%%", percents));
 			if (percents >= 0)
 				return true;
-			if (Render.this._print) System.out.printf("\r%02d%%", 100);
+			if (Render.this._print) System.out.println(String.format("\r%02d%%", 100));
 			return false;
 		}
 	}
