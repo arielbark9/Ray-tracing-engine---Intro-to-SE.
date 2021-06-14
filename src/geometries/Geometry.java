@@ -7,7 +7,7 @@ import primitives.*;
  *
  * @author ariel and mf.
  */
-public abstract class Geometry implements Intersectable {
+public abstract class Geometry extends Intersectable {
     /**
      * emission color of geometry
      */
@@ -17,11 +17,6 @@ public abstract class Geometry implements Intersectable {
      * material object representing the material of the geometry
      */
     private Material material = new Material();
-
-    /**
-     * bounding box of geometry
-     */
-    protected BoundingBox boundingBox;
 
     /**
      * calculates normal vector to a shape -

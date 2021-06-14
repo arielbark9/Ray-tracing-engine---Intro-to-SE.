@@ -1,6 +1,5 @@
 package geometries;
 
-import primitives.BoundingBox;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;

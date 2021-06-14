@@ -1,12 +1,9 @@
 package unittests.renderer;
 
-import geometries.Cylinder;
-import geometries.Plane;
+import geometries.*;
 import org.junit.Test;
 
 import elements.*;
-import geometries.Sphere;
-import geometries.Triangle;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
@@ -20,7 +17,7 @@ import scene.Scene;
  */
 public class ReflectionRefractionTests {
 	private Scene scene = new Scene("Test scene");
-	private final int rayCount = 64;
+	private final int rayCount = 900;
 	/**
 	 * Produce a picture of a sphere lighted by a spot light
 	 */
@@ -107,57 +104,66 @@ public class ReflectionRefractionTests {
 		Material tableTop = new Material().setKd(0.7).setKs(0.15);
 		Material tableLegs = new Material().setKd(0.5).setKs(0.25);
 		scene.geometries.add( //
-				//ABC
-				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,0),new Point3D(-400,400,0))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//ACD
-				new Triangle(new Point3D(400,-400,0),new Point3D(-400,400,0),new Point3D(-400,-400,0))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//OMN
-				new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(400,400,40))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//OMP
-				new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(-400,-400,40))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//ANM
-				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,-400,40))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//ANB
-				new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,400,0))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//APM
-				new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(400,-400,40))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//APD
-				new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,-400,0))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//DPO
-				new Triangle(new Point3D(-400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,400,40))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//DOC
-				new Triangle(new Point3D(-400,-400,0),new Point3D(-400,400,40),new Point3D(-400,400,0))
-						.setEmission(tableColor).setMaterial(tableTop),
-				//K-Cyl
-				new Cylinder(new Ray(new Point3D(-300,-300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
-				//E-Cyl
-				new Cylinder(new Ray(new Point3D(300,-300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
-				//C-Cyl
-				new Cylinder(new Ray(new Point3D(300,300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
-				//L-Cyl
-				new Cylinder(new Ray(new Point3D(-300,300,-300),new Vector(0,0,1)), 40, 300)
-						.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
+				new Geometries( // table
+					new Geometries( // table top
+						//ABC
+						new Triangle(new Point3D(400,-400,0),new Point3D(400,400,0),new Point3D(-400,400,0))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//ACD
+						new Triangle(new Point3D(400,-400,0),new Point3D(-400,400,0),new Point3D(-400,-400,0))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//OMN
+						new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(400,400,40))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//OMP
+						new Triangle(new Point3D(-400,400,40),new Point3D(400,-400,40),new Point3D(-400,-400,40))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//ANM
+						new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,-400,40))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//ANB
+						new Triangle(new Point3D(400,-400,0),new Point3D(400,400,40),new Point3D(400,400,0))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//APM
+						new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(400,-400,40))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//APD
+						new Triangle(new Point3D(400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,-400,0))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//DPO
+						new Triangle(new Point3D(-400,-400,0),new Point3D(-400,-400,40),new Point3D(-400,400,40))
+								.setEmission(tableColor).setMaterial(tableTop),
+						//DOC
+						new Triangle(new Point3D(-400,-400,0),new Point3D(-400,400,40),new Point3D(-400,400,0))
+								.setEmission(tableColor).setMaterial(tableTop)),
+					new Geometries( // legs
+						//K-Cyl
+						new Cylinder(new Ray(new Point3D(-300,-300,-300),new Vector(0,0,1)), 40, 300)
+								.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
+						//E-Cyl
+						new Cylinder(new Ray(new Point3D(300,-300,-300),new Vector(0,0,1)), 40, 300)
+								.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
+						//C-Cyl
+						new Cylinder(new Ray(new Point3D(300,300,-300),new Vector(0,0,1)), 40, 300)
+								.setEmission(new Color(0,0,128)).setMaterial(tableLegs),
+						//L-Cyl
+						new Cylinder(new Ray(new Point3D(-300,300,-300),new Vector(0,0,1)), 40, 300)
+								.setEmission(new Color(0,0,128)).setMaterial(tableLegs)
+					)
+				),
 				//Floor
+				new Geometries(
 				new Plane(new Point3D(0,0,-300), new Vector(0,0,1))
-						.setEmission(new Color(102, 102, 153)).setMaterial(wallMat),
+						.setEmission(new Color(102, 102, 153)).setMaterial(wallMat)),
 				//Wall 1
+				new Geometries(
 				new Plane(new Point3D(0,1000,0), new Vector(0,-1,0))
-						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat),
+						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat)),
 				//Wall 2
+				new Geometries(
 				new Plane(new Point3D(-1000,0,0), new Vector(1,0,0))
-						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat),
+						.setEmission(new Color(Color.BLACK)).setMaterial(wallMat)),
+				new Geometries(
 				//Mirror 1
 				new Triangle(new Point3D(400,998,0),new Point3D(400,998,600),new Point3D(-400,998,0))
 						.setEmission(Color.BLACK).setMaterial(mirror),
@@ -169,12 +175,13 @@ public class ReflectionRefractionTests {
 						.setEmission(new Color(255, 255, 204)).setMaterial(wallMat),
 				//back of Mirror 2
 				new Triangle(new Point3D(-410,999,610),new Point3D(410,999,610),new Point3D(-410,999,-10))
-						.setEmission(new Color(255, 255, 204)).setMaterial(wallMat),
+						.setEmission(new Color(255, 255, 204)).setMaterial(wallMat)),
 				// Bulb sphere
-				new Sphere(new Point3D(0,0,700),100).setEmission(new Color(153, 255, 102)).setMaterial(new Material().setKt(0.9))
+				new Geometries(
+				new Sphere(new Point3D(0,0,700),100).setEmission(new Color(153, 255, 102)).setMaterial(new Material().setKt(0.9)))
 		);
 
-
+		Geometries checkers = new Geometries();
 		Color color;
 		for (int i = -200; i < 200; i+=50) {
 			for (int j = -200; j < 200; j+=50) {
@@ -183,7 +190,7 @@ public class ReflectionRefractionTests {
 				else
 					color = (((j+200)/50)%2 != 0)? Color.BLACK : new Color(255,255,255);
 
-				scene.geometries.add(new Triangle(new Point3D(j,i,45),new Point3D(j+50,i,45),new Point3D(j,i+50,45))
+				checkers.add(new Triangle(new Point3D(j,i,45),new Point3D(j+50,i,45),new Point3D(j,i+50,45))
 						.setEmission(color),
 						new Triangle(new Point3D(j+50,i+50,45),new Point3D(j+50,i,45),new Point3D(j,i+50,45))
 								.setEmission(color));
@@ -195,17 +202,18 @@ public class ReflectionRefractionTests {
 					else
 						color = new Color(123, 104, 255);
 
-					scene.geometries.add(new Cylinder(new Ray(new Point3D(j+25,i+25,45),new Vector(0,0,1)),15,7)
-							.setEmission(color));
+					checkers.add(new Cylinder(new Ray(new Point3D(j+25,i+25,45),new Vector(0,0,1)),15,7)
+							.setEmission(color).setMaterial(new Material().setKd(0.5).setKs(0.7).setShininess(20).setKt(0.5)));
 				}
 			}
 		}
+		scene.geometries.add(checkers);
 
 		scene.lights.add(new DirectionalLight(new Color(255, 255, 153),new Vector(1,0,0)));
 		scene.lights.add(new PointLight(new Color(153, 255, 102),new Point3D(0,0,700))
 				.setKl(0.00001).setKq(0.000001));
 
-		ImageWriter imageWriter = new ImageWriter("myTest", 3840, 2160);
+		ImageWriter imageWriter = new ImageWriter("myTest", 1024, 1024);
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //

@@ -35,6 +35,11 @@ public class Render {
 	private int SSrays = 0;
 
 	/**
+	 * indicates if using early rejection with bounding boxes
+	 */
+	private boolean earlyReject = false;
+
+	/**
 	 * num of threads being used
 	 */
 	private int _threads = 1;
@@ -230,6 +235,16 @@ public class Render {
 	 */
 	public Render setDebugPrint() {
 		_print = true;
+		return this;
+	}
+
+	/**
+	 * builder pattern setter
+	 * @param earlyReject should use early reject
+	 * @return this object
+	 */
+	public Render setEarlyReject(boolean earlyReject) {
+		this.earlyReject = earlyReject;
 		return this;
 	}
 
