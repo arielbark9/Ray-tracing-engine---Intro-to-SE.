@@ -149,6 +149,9 @@ public class Render {
 	 * the Renderer object
 	 */
 	public void renderImage() {
+		if(earlyReject)
+			rayTracer.useEarlyReject();
+
 		final int nX = imageWriter.getNx();
 		final int nY = imageWriter.getNy();
 
@@ -240,7 +243,7 @@ public class Render {
 
 	/**
 	 * builder pattern setter
-	 * @param earlyReject should use early reject
+	 * @param earlyReject should use early reject (BVH)
 	 * @return this object
 	 */
 	public Render setEarlyReject(boolean earlyReject) {

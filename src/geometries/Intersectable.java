@@ -14,6 +14,7 @@ public abstract class Intersectable {
      * every intersectable object also has a bounding box
      */
     protected BoundingBox boundingBox;
+
     /**
      * Geometry and Point PDS.
      */

@@ -1,5 +1,6 @@
 package renderer;
 
+import geometries.Geometries;
 import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
@@ -36,4 +37,11 @@ public abstract class RayTracerBase {
      * @return average Color of traced point on the ray
      */
     public abstract Color traceRays(List<Ray> rays);
+
+    /**
+     * construct scene's geometries in BVH binary tree format
+     */
+    public void useEarlyReject() {
+        scene.geometries = new Geometries(scene.geometries.createBVH(scene.geometries));
+    }
 }
