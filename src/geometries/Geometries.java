@@ -58,7 +58,7 @@ public class Geometries extends Intersectable {
             if(intersectable.boundingBox.getMax().getX() > maxX)
                 maxX = intersectable.boundingBox.getMax().getX();
             if(intersectable.boundingBox.getMax().getY() > maxY)
-               maxY = intersectable.boundingBox.getMax().getY();
+                maxY = intersectable.boundingBox.getMax().getY();
             if(intersectable.boundingBox.getMax().getZ() > maxZ)
                 maxZ = intersectable.boundingBox.getMax().getZ();
         }
@@ -92,7 +92,7 @@ public class Geometries extends Intersectable {
         char longestAxis;
         Point3D dif = composite.boundingBox.getMax().subtract(composite.boundingBox.getMin()).getHead();
         longestAxis = dif.getX()>dif.getY()?(dif.getX()>dif.getZ()?'X':'Z'):(dif.getY()>dif.getZ()?'Y':'Z');
-        sortAlongAxis(composite,longestAxis);
+        composite.sortAlongAxis(longestAxis);
 
         List<Geometries> geosLists = partitionList(composite,2);
         composite = new Geometries();
@@ -122,14 +122,13 @@ public class Geometries extends Intersectable {
      * sort a composite along a given axis.
      * the composite's position along the axis is determined by it's bounding box
      * axis average. (minAxis + maxAxis)/2
-     * @param composite composite to be sorted
      * @param axis X,Y or Z char
      */
-    private void sortAlongAxis(Geometries composite, char axis) {
+    private void sortAlongAxis(char axis) {
         switch (axis) {
-            case 'X' -> composite.geometries.sort(new SortByX());
-            case 'Y' -> composite.geometries.sort(new SortByY());
-            case 'Z' -> composite.geometries.sort(new SortByZ());
+            case 'X' -> this.geometries.sort(new SortByX());
+            case 'Y' -> this.geometries.sort(new SortByY());
+            case 'Z' -> this.geometries.sort(new SortByZ());
             default -> throw new IllegalArgumentException("axis must be X,Y or Z");
         }
     }
@@ -143,7 +142,7 @@ class SortByX implements Comparator<Intersectable>{
     public int compare(Intersectable s1, Intersectable s2) {
         double s1X = (s1.boundingBox.getMin().getX()+s1.boundingBox.getMax().getX())/2;
         double s2X = (s2.boundingBox.getMin().getX()+s2.boundingBox.getMax().getX())/2;
-        return (int)(s1X-s2X);
+        return Double.compare(s1X,s2X);
     }
 }
 
@@ -155,7 +154,7 @@ class SortByY implements Comparator<Intersectable>{
     public int compare(Intersectable s1, Intersectable s2) {
         double s1Y = (s1.boundingBox.getMin().getY()+s1.boundingBox.getMax().getY())/2;
         double s2Y = (s2.boundingBox.getMin().getY()+s2.boundingBox.getMax().getY())/2;
-        return (int)(s1Y-s2Y);
+        return Double.compare(s1Y,s2Y);
     }
 }
 
@@ -167,6 +166,6 @@ class SortByZ implements Comparator<Intersectable>{
     public int compare(Intersectable s1, Intersectable s2) {
         double s1Z = (s1.boundingBox.getMin().getZ()+s1.boundingBox.getMax().getZ())/2;
         double s2Z = (s2.boundingBox.getMin().getZ()+s2.boundingBox.getMax().getZ())/2;
-        return (int)(s1Z-s2Z);
+        return Double.compare(s1Z,s2Z);
     }
 }

@@ -42,6 +42,7 @@ public class ReflectionRefractionTests {
 				.setCamera(camera) //
 				.setRayTracer(new RayTracerBasic(scene))
 				.setSSrays(rayCount)
+				.setEarlyReject(true)
 				.setMultithreading(3)
 				.setDebugPrint();
 		render.renderImage();
@@ -83,6 +84,7 @@ public class ReflectionRefractionTests {
 				.setCamera(camera) //
 				.setRayTracer(new RayTracerBasic(scene))
 				.setSSrays(rayCount)
+				.setEarlyReject(true)
 				.setMultithreading(3)
 				.setDebugPrint();
 
@@ -243,6 +245,7 @@ public class ReflectionRefractionTests {
 				.setCamera(camera) //
 				.setRayTracer(new RayTracerBasic(scene))
 				.setSSrays(rayCount)
+				.setEarlyReject(true)
 				.setMultithreading(3)
 				.setDebugPrint();
 
