@@ -68,7 +68,7 @@ public class Geometries extends Intersectable {
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance) {
         LinkedList<GeoPoint> intersections = new LinkedList<>();
-        if(boundingBox.anyGeoIntersections(ray,maxDistance)) { // if intersects the AABB
+        if(boundingBox != null && boundingBox.anyGeoIntersections(ray,maxDistance)) { // if intersects the AABB
             for (Intersectable intersectable : geometries) {
                 List<GeoPoint> temp = intersectable.findGeoIntersections(ray,maxDistance);
                 if(temp!=null)
@@ -76,7 +76,7 @@ public class Geometries extends Intersectable {
             }
         }
 
-        return intersections;
+        return intersections.size() == 0 ? null : intersections;
     }
 
     /**

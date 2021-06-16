@@ -209,7 +209,7 @@ public class ReflectionRefractionTests {
 				.setRayTracer(new RayTracerBasic(scene))
 				.setSSrays(rayCount)
 				.setMultithreading(3)
-				.setEarlyReject(false)
+				.setEarlyReject(true)
 				.setDebugPrint();
 
 		render.renderImage();
